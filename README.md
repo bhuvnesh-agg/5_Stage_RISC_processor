@@ -1,1 +1,1 @@
-# 5_Stage_RISC_processor
+# 5 Stage Pipelined RISC processor
