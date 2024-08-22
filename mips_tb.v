@@ -1,24 +1,32 @@
 `include "mips.v"
 module mips_tb;
-  reg clk1;
-  reg clk2;
-  integer file;
-  integer k, n, i, r;
-  reg [31:0] data;
-  mips32 cpu(.clk1(clk1), .clk2(clk2));
+reg clk1;
+reg clk2;
+integer file;
+integer k, n, i, r;
+reg [31:0] data;
+mips32 cpu(.clk1(clk1), .clk2(clk2));
 
   initial begin
     clk1 = 0; clk2 =0;
     repeat (200)
-    begin
-      #5 clk1 = 1;  #5 clk1 = 0;
-      #5 clk2 =1; #5 clk2 =0;
-      $display ("PC - %2d | R7 - %2d | R3 - %2d | R4 - %2d | R5 - %2d | R9 - %2d | MEM[101] - %2d", cpu.PC, cpu.regbank[7], cpu.regbank[3], cpu.regbank[4], cpu.regbank[5], cpu.regbank[9], cpu.mem[101]);
+      begin
+        #5 clk1 = 1;  #5 clk1 = 0;
+        #5 clk2 =1; #5 clk2 =0;
+        // $display ("PC - %2d | R7 - %2d | R3 - %2d | R4 - %2d | R5 - %2d | R9 - %2d | MEM[101] - %2d", cpu.PC, cpu.regbank[7], cpu.regbank[3], cpu.regbank[4], cpu.regbank[5], cpu.regbank[9], cpu.mem[101]);
+      end
+    $display ("Index of Key %2d is: %2d", cpu.regbank[5], cpu.regbank[7]);
     end
-  end
 
   initial begin
-    file = $fopen("linear_search.bin", "r");
+    reg [8 * 40:1] filename;
+    if ($value$plusargs("%s", filename)) begin
+      file = $fopen(filename, "r");
+    end
+    else begin
+      $display("usage: mips32 +<path/to/binary/file>");
+      $finish;
+    end
 
     if (file == 0) begin
       $finish;
@@ -41,4 +49,4 @@ module mips_tb;
     $fclose(file);
   end
 
-endmodule
+  endmodule

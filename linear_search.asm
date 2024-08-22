@@ -1,9 +1,10 @@
   ADDI  R4  R0  0b0000000000001100  
   ADDI  R5  R0  0b0000000000000110 
   ADD   R7  R0  R0              
+  ADD   R3  R0  R0              
 
   .Loop:
-  LW    R7  R3  101
+  LW    R3  R7  101
   ADD   R0  R0  R0
   ADD   R0  R0  R0
   SUB   R1  R5  R3
