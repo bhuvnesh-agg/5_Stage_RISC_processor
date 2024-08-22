@@ -8,15 +8,18 @@ Additionally, there is a custom Python Assembler that assembles code written in 
 ## Usage Instructions
 #### Assembling Code
 Assembly code written in a `.asm` file can be assembled using the following command:
+
 ```python3 mips_new.py input.asm output.bin```
 
 #### Compiling the Testbench
 The testbench currently stores numbers starting from 0 from memory location 100. This can be changed inside the `mips_tb.v` file.
 The testbench can be compiled by running the following command:
+
 ```iverilog -g2005-sv mips_tb.v mips32```
 
 #### Executing Code
 The generated binary can be used to execute the assembled on the CPU. This can be done by using the following command:
+
 ```./mips32 +<path/to/assembled/binary>```
 
 ## Features
